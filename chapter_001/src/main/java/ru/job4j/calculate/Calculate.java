@@ -3,7 +3,7 @@ package ru.job4j.calculate;
  * Calculate 
  *
  * @author - AnatoliyEzhemenskiy
- * 
+ *
  */
 public class Calculate {
 		/**
@@ -13,7 +13,7 @@ public class Calculate {
 		*/
 		public String echo(String name) {
 			return "Echo, echo, echo : " + name;
-		}		
+		}
 		/**
 		 * Main.
 		 * @param args - args.

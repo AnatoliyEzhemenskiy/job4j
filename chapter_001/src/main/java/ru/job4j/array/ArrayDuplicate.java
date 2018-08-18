@@ -3,7 +3,7 @@ package ru.job4j.array;
 import java.util.Arrays;
 /**
  Удаление дубликатов в массиве
-*/
+ */
 public class ArrayDuplicate {
     String[] remove(String[] array) {
         //кол-во одинаковых записей
@@ -13,7 +13,7 @@ public class ArrayDuplicate {
                 if (array[i].equals(array[j])) {
                     array[j] = array[last - 1];
                     last--;
-					j--;
+                    j--;
                 }
             }
         }

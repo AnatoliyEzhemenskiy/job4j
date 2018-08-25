@@ -6,8 +6,8 @@ public class Figure3T extends Rectangle {
     private boolean markO;
 
     public Figure3T(boolean markX) {
-        this.markX = markX;
-        this.markO = !markX;
+        this.markX = false;
+        this.markO = false;
     }
 
     public void take(boolean markX) {

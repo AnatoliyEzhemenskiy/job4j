@@ -33,7 +33,14 @@ public class Logic3T {
     }
 
     public boolean hasGap() {
-        return true;
+        System.out.println(this.table.length);
+        for(int index = 0; index != this.table.length; index++) {
+            for(int index2 = 0; index2 != this.table.length; index2++) {
+               if (!(this.table[index][index2].hasMarkO()|| this.table[index][index2].hasMarkX()))
+                   return true;
+            }
+        }
+        return false;
     }
 
     public boolean fillBy(Predicate<Figure3T> predicate, int startX, int startY, int deltaX, int deltaY) {

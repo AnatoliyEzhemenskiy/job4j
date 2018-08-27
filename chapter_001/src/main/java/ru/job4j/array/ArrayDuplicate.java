@@ -5,6 +5,11 @@ import java.util.Arrays;
  Удаление дубликатов в массиве
  */
 public class ArrayDuplicate {
+    /**
+     * Удаление одинаовых строк в массиве
+     * @param array - массив строк
+     * @return массив строк с уделенными одинаковыми значениями
+     */
     String[] remove(String[] array) {
         //кол-во одинаковых записей
         int last = array.length;

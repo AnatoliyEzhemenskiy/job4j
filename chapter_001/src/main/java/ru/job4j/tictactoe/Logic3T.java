@@ -2,6 +2,9 @@ package ru.job4j.tictactoe;
 
 import java.util.function.Predicate;
 
+/**
+ * Проверка логики для определения победителя
+ */
 public class Logic3T {
     private final Figure3T[][] table;
 
@@ -9,40 +12,56 @@ public class Logic3T {
         this.table = table;
     }
 
-
+    /**
+     * @return true, если победили крестики
+     */
     public boolean isWinnerX() {
-        return this.fillBy(Figure3T::hasMarkX, 0, 0, 1, 0) ||
-                this.fillBy(Figure3T::hasMarkX, 0, 0, 0, 1) ||
-                this.fillBy(Figure3T::hasMarkX, 0, 1, 1, 0) ||
-                this.fillBy(Figure3T::hasMarkX, 1, 0, 0, 1) ||
-                this.fillBy(Figure3T::hasMarkX, this.table.length - 1, 0, 0, 1) ||
-                this.fillBy(Figure3T::hasMarkX, 0, this.table.length - 1, 1, 0) ||
-                this.fillBy(Figure3T::hasMarkX, 0,0, 1, 1) ||
-                this.fillBy(Figure3T::hasMarkX, this.table.length - 1 , 0, -1, 1);
+        for (int i = 0; i < this.table.length; i++) {
+            if (this.fillBy(Figure3T::hasMarkX, i, 0, 0, 1) || this.fillBy(Figure3T::hasMarkX, 0, i, 1, 0)) {
+                return true;
+
+            }
+        }
+        return this.fillBy(Figure3T::hasMarkX, 0, 0, 1, 1) || this.fillBy(Figure3T::hasMarkO, this.table.length - 1, 0, -1, 1);
     }
 
+    /**
+     * @return true, если победили нолики
+     */
     public boolean isWinnerO() {
-        return this.fillBy(Figure3T::hasMarkO, 0, 0, 1, 0) ||
-                this.fillBy(Figure3T::hasMarkO, 0, 0, 0, 1) ||
-                this.fillBy(Figure3T::hasMarkO, 0, 1, 1, 0) ||
-                this.fillBy(Figure3T::hasMarkO, 1, 0, 0, 1) ||
-                this.fillBy(Figure3T::hasMarkO, this.table.length - 1, 0, 0, 1) ||
-                this.fillBy(Figure3T::hasMarkO, 0, this.table.length - 1, 1, 0) ||
-                this.fillBy(Figure3T::hasMarkO, 0,0, 1, 1) ||
-                this.fillBy(Figure3T::hasMarkO, this.table.length - 1 , 0, -1, 1);
-    }
+        for (int i = 0; i < this.table.length; i++) {
+            if (this.fillBy(Figure3T::hasMarkO, i, 0, 0, 1) || this.fillBy(Figure3T::hasMarkO, 0, i, 1, 0)) {
+                return true;
 
+            }
+        }
+        return this.fillBy(Figure3T::hasMarkO, 0, 0, 1, 1) || this.fillBy(Figure3T::hasMarkO, this.table.length - 1, 0, -1, 1);
+     }
+
+    /**
+     *
+     * @return true, если есть еще место для игры
+     */
     public boolean hasGap() {
-        System.out.println(this.table.length);
-        for(int index = 0; index != this.table.length; index++) {
-            for(int index2 = 0; index2 != this.table.length; index2++) {
-               if (!(this.table[index][index2].hasMarkO()|| this.table[index][index2].hasMarkX()))
+        for (int i = 0; i != this.table.length; i++) {
+            for (int j = 0; j != this.table.length; j++) {
+               if (!(this.table[i][j].hasMarkO() || this.table[i][j].hasMarkX())) {
                    return true;
+               }
             }
         }
         return false;
     }
 
+    /**
+     * Проверка на заполнение линии с началом координат startX, startY, с шагом deltaX, deltaY
+     * @param predicate
+     * @param startX
+     * @param startY
+     * @param deltaX
+     * @param deltaY
+     * @return true, если выполнено условие predicate, по всей линии
+     */
     public boolean fillBy(Predicate<Figure3T> predicate, int startX, int startY, int deltaX, int deltaY) {
         boolean result = true;
         for (int index = 0; index != this.table.length; index++) {
@@ -56,7 +75,4 @@ public class Logic3T {
         }
         return result;
     }
-
-
-
 }

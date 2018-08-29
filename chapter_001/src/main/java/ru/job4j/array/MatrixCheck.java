@@ -1,6 +1,17 @@
 package ru.job4j.array;
 
+/**
+ * MatrixCheck
+ *
+ * @author - AnatoliyEzhemenskiy
+ *
+ */
 public class MatrixCheck {
+    /**
+     * Элементы диагонали мантрицы одинаковы
+     * @param data
+     * @return
+     */
     public boolean mono(boolean[][] data) {
         boolean result = true;
 		int last = data[0].length - 1;

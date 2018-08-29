@@ -1,7 +1,10 @@
 package ru.job4j.array;
 
 /**
- * Проверка массива boolean на одинаковость значений
+ * Check
+ *
+ * @author - AnatoliyEzhemenskiy
+ *
  */
 public class Check {
     /**

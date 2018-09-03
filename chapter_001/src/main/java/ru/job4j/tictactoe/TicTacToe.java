@@ -23,7 +23,7 @@ public class TicTacToe extends Application {
     private final Logic3T logic = new Logic3T(cells);
 
     private Figure3T buildRectangle(int x, int y, int size) {
-        Figure3T rect = new Figure3T(true);
+        Figure3T rect = new Figure3T();
         rect.setX(x * size);
         rect.setY(y * size);
         rect.setHeight(size);

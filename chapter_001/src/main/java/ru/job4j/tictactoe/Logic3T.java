@@ -18,15 +18,15 @@ public class Logic3T {
     public boolean isWinnerX() {
         boolean result = false;
         for (int i = 0; i < this.table.length; i++) {
-            if (this.fillBy(Figure3T::hasMarkX, i, 0, 0, 1) ||
-                    this.fillBy(Figure3T::hasMarkX, 0, i, 1, 0)) {
+            if (this.fillBy(Figure3T::hasMarkX, i, 0, 0, 1)
+                    || this.fillBy(Figure3T::hasMarkX, 0, i, 1, 0)) {
                 result = true;
                 break;
             }
         }
-       if(!result) {
-           result = this.fillBy(Figure3T::hasMarkX, 0, 0, 1, 1) ||
-           this.fillBy(Figure3T::hasMarkX, this.table.length - 1, 0, -1, 1);
+       if (!result) {
+          return this.fillBy(Figure3T::hasMarkX, 0, 0, 1, 1)
+                  || this.fillBy(Figure3T::hasMarkX, this.table.length - 1, 0, -1, 1);
        }
        return result;
     }
@@ -44,7 +44,7 @@ public class Logic3T {
             }
         }
         if (!result) {
-            result = this.fillBy(Figure3T::hasMarkO, 0, 0, 1, 1)
+            return this.fillBy(Figure3T::hasMarkO, 0, 0, 1, 1)
                     || this.fillBy(Figure3T::hasMarkO, this.table.length - 1, 0, -1, 1);
         }
         return result;
@@ -58,10 +58,13 @@ public class Logic3T {
         boolean result = false;
         for (int i = 0; i != this.table.length; i++) {
             for (int j = 0; j != this.table.length; j++) {
-               if (!(this.table[i][j].hasMarkO() || this.table[i][j].hasMarkX())) {
+                if (!(this.table[i][j].hasMarkO() || this.table[i][j].hasMarkX())) {
                    result = true;
                    break;
                }
+            }
+            if (result) {
+                break;
             }
         }
         return result;

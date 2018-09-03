@@ -16,41 +16,55 @@ public class Logic3T {
      * @return true, если победили крестики
      */
     public boolean isWinnerX() {
+        boolean result = false;
         for (int i = 0; i < this.table.length; i++) {
-            if (this.fillBy(Figure3T::hasMarkX, i, 0, 0, 1) || this.fillBy(Figure3T::hasMarkX, 0, i, 1, 0)) {
-                return true;
-
+            if (this.fillBy(Figure3T::hasMarkX, i, 0, 0, 1) ||
+                    this.fillBy(Figure3T::hasMarkX, 0, i, 1, 0)) {
+                result = true;
+                break;
             }
         }
-        return this.fillBy(Figure3T::hasMarkX, 0, 0, 1, 1) || this.fillBy(Figure3T::hasMarkO, this.table.length - 1, 0, -1, 1);
+       if(!result) {
+           result = this.fillBy(Figure3T::hasMarkX, 0, 0, 1, 1) ||
+           this.fillBy(Figure3T::hasMarkX, this.table.length - 1, 0, -1, 1);
+       }
+       return result;
     }
 
     /**
      * @return true, если победили нолики
      */
     public boolean isWinnerO() {
+        boolean result = false;
         for (int i = 0; i < this.table.length; i++) {
-            if (this.fillBy(Figure3T::hasMarkO, i, 0, 0, 1) || this.fillBy(Figure3T::hasMarkO, 0, i, 1, 0)) {
-                return true;
-
+            if (this.fillBy(Figure3T::hasMarkO, i, 0, 0, 1)
+                    || this.fillBy(Figure3T::hasMarkO, 0, i, 1, 0)) {
+                result = true;
+                break;
             }
         }
-        return this.fillBy(Figure3T::hasMarkO, 0, 0, 1, 1) || this.fillBy(Figure3T::hasMarkO, this.table.length - 1, 0, -1, 1);
-     }
+        if (!result) {
+            result = this.fillBy(Figure3T::hasMarkO, 0, 0, 1, 1)
+                    || this.fillBy(Figure3T::hasMarkO, this.table.length - 1, 0, -1, 1);
+        }
+        return result;
+    }
 
     /**
      *
      * @return true, если есть еще место для игры
      */
     public boolean hasGap() {
+        boolean result = false;
         for (int i = 0; i != this.table.length; i++) {
             for (int j = 0; j != this.table.length; j++) {
                if (!(this.table[i][j].hasMarkO() || this.table[i][j].hasMarkX())) {
-                   return true;
+                   result = true;
+                   break;
                }
             }
         }
-        return false;
+        return result;
     }
 
     /**

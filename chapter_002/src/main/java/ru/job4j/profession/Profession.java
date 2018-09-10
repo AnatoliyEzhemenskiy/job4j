@@ -10,6 +10,6 @@ public class Profession {
     private String name;
 
     public Profession(String name) {
-        this.name= name;
+        this.name = name;
     }
 }

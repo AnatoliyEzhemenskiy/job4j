@@ -1,5 +1,6 @@
 package ru.job4j.tracker;
 
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -46,10 +47,13 @@ public class Tracker {
      * @param item - изменяющий элемент
      */
     public void replace(String id, Item item) {
-        Item item1 = findById(id);
-        item1.setName(item.getName());
-        item1.setCreated(item.getCreated());
-        item1.setDescription(item.getDescription());
+        for (int i = 0; i < this.position; i++) {
+            if (items[i].getId().equals(id)) {
+                this.items[i] = item;
+                this.items[i].setId(id);
+                break;
+            }
+        }
     }
 
     /**
@@ -57,8 +61,8 @@ public class Tracker {
      * @param id - уникальный ключ
      */
     public void delete(String id) {
-        for(int i = 0; i < this.position; i++) {
-           if(items[i].getId().equals(id)) {
+        for (int i = 0; i < this.position; i++) {
+           if (items[i].getId().equals(id)) {
                System.arraycopy(this.items, i + 1, this.items, i, this.position - i - 1);
                this.items[this.position - 1] = null;
                this.position--;
@@ -71,11 +75,7 @@ public class Tracker {
      * @return массив Item
      */
     public Item[] findAll() {
-        Item[] result = new Item[this.position];
-        for(int i = 0; i < this.position; i++) {
-            result[i] = this.items[i];
-        }
-        return result;
+        return Arrays.copyOf(this.items, this.position);
     }
 
     /**
@@ -87,7 +87,7 @@ public class Tracker {
         Item[] result = new Item[position];
         int i = 0;
         for (Item item : this.items) {
-            if(item != null && item.getName().equals(key)) {
+            if (item != null && item.getName().equals(key)) {
                 result[i++] = item;
             }
         }
@@ -102,7 +102,7 @@ public class Tracker {
     public Item findById(String id) {
         Item result = null;
         for (Item item : this.items) {
-            if(item != null && item.getId().equals(id)) {
+            if (item != null && item.getId().equals(id)) {
                 result = item;
                 break;
             }

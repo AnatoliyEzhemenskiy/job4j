@@ -1,27 +1,25 @@
 package ru.job4j.tracker;
-
 import org.junit.Test;
-
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class TrackerTest {
 
     @Test
     public void whenAddNewItemThenTrackerHasSameItem() {
         Tracker tracker = new Tracker();
-        Item item = new Item("test1","testDescription",123L);
+        Item item = new Item("test1", "testDescription", 123L);
         tracker.add(item);
         assertThat(tracker.findAll()[0], is(item));
     }
     @Test
     public void whenReplaceNameThenReturnNewName() {
         Tracker tracker = new Tracker();
-        Item previous = new Item("test1","testDescription",123L);
+        Item previous = new Item("test1", "testDescription", 123L);
         // Добавляем заявку в трекер. Теперь в объект проинициализирован id.
         tracker.add(previous);
         // Создаем новую заявку.
-        Item next = new Item("test2","testDescription2",1234L);
+        Item next = new Item("test2", "testDescription2", 1234L);
         // Проставляем старый id из previous, который был сгенерирован выше.
         next.setId(previous.getId());
         // Обновляем заявку в трекере.
@@ -32,34 +30,39 @@ public class TrackerTest {
     @Test
     public void whenDeleteItemThenReturnNewArrayWithoutItem() {
         Tracker tracker = new Tracker();
-        Item item1 = new Item("test1","testDescription",123L);
+        Item item1 = new Item("test1", "testDescription", 123L);
         tracker.add(item1);
-        Item item2 = new Item("test2","testDescription2",1234L);
+        Item item2 = new Item("test2", "testDescription2", 1234L);
         tracker.add(item2);
-        Item item3 = new Item("test3","testDescription3",1234L);
+        Item item3 = new Item("test3", "testDescription3", 1234L);
         tracker.add(item3);
-        tracker.delete(item2.getId());
-        Item[] result = tracker.findAll();
-        assertThat(result[1].getName(), is("test3"));
+
+        Item result = tracker.findAll()[2];
+        result.setId(tracker.findAll()[2].getId());
+        tracker.delete(tracker.findAll()[1].getId());
+        assertThat(tracker.findAll()[1], is(result));
     }
     @Test
     public void whenFindByIdThenReturnCorrectItem() {
         Tracker tracker = new Tracker();
-        Item item1 = new Item("test1","testDescription",123L);
+        Item item1 = new Item("test1", "testDescription", 123L);
         tracker.add(item1);
-        Item item2 = new Item("test2","testDescription2",1234L);
+        Item item2 = new Item("test2", "testDescription2", 1234L);
         tracker.add(item2);
-        Item result = tracker.findById(item1.getId());
-        assertThat(result.getName(), is("test1"));
+
+        Item result =  tracker.findAll()[0];
+        result.setId(tracker.findAll()[0].getId());
+
+        assertThat(tracker.findAll()[0], is(result));
     }
     @Test
     public void whenFindByNameThenReturnItem() {
         Tracker tracker = new Tracker();
-        Item item1 = new Item("test1","testDescription",123L);
+        Item item1 = new Item("test1", "testDescription", 123L);
         tracker.add(item1);
-        Item item2 = new Item("test2","testDescription2",1234L);
+        Item item2 = new Item("test1", "testDescription2", 1234L);
         tracker.add(item2);
-        Item[] result = tracker.findByName("test2");
-        assertThat(result[0].getName(), is("test2"));
+        Item[] result = tracker.findByName("test1");
+        assertThat(result, is(tracker.findAll()));
     }
 }

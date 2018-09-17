@@ -30,17 +30,15 @@ public class TrackerTest {
     @Test
     public void whenDeleteItemThenReturnNewArrayWithoutItem() {
         Tracker tracker = new Tracker();
-        Item item1 = new Item("test1", "testDescription", 123L);
-        tracker.add(item1);
-        Item item2 = new Item("test2", "testDescription2", 1234L);
-        tracker.add(item2);
-        Item item3 = new Item("test3", "testDescription3", 1234L);
-        tracker.add(item3);
-
-        Item result = tracker.findAll()[2];
-        result.setId(tracker.findAll()[2].getId());
-        tracker.delete(tracker.findAll()[1].getId());
-        assertThat(tracker.findAll()[1], is(result));
+        Item[] items = {new Item("test1", "testDescription", 123L),
+                new Item("test2", "testDescription2", 1234L),
+        };
+        Item item = new Item("test3", "testDescription3", 1234L);
+        tracker.add(item);
+        tracker.add(items[0]);
+        tracker.add(items[1]);
+        tracker.delete(item.getId());
+        assertThat(tracker.findAll(), is(items));
     }
     @Test
     public void whenFindByIdThenReturnCorrectItem() {

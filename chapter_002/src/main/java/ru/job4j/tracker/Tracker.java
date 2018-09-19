@@ -46,29 +46,35 @@ public class Tracker {
      * @param id - уникальный ключ
      * @param item - изменяющий элемент
      */
-    public void replace(String id, Item item) {
+    public boolean replace(String id, Item item) {
+        boolean result = false;
         for (int i = 0; i < this.position; i++) {
             if (items[i].getId().equals(id)) {
                 this.items[i] = item;
                 this.items[i].setId(id);
+                result = true;
                 break;
             }
         }
+        return result;
     }
 
     /**
      * Метод, удаляющий элемент массива
      * @param id - уникальный ключ
      */
-    public void delete(String id) {
+    public boolean delete(String id) {
+        boolean result = false;
         for (int i = 0; i < this.position; i++) {
            if (items[i].getId().equals(id)) {
                System.arraycopy(this.items, i + 1, this.items, i, this.position - i - 1);
                this.items[this.position - 1] = null;
                this.position--;
+               result = true;
                break;
             }
        }
+       return result;
     }
 
     /**

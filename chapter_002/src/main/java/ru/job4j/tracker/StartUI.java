@@ -1,6 +1,26 @@
 package ru.job4j.tracker;
 
 public class StartUI {
+    public static StringBuilder getMENU() {
+        return MENU;
+    }
+
+    private static final StringBuilder MENU = new StringBuilder()
+            .append("Меню.")
+            .append(System.lineSeparator())
+            .append("0. Add new Item")
+            .append(System.lineSeparator())
+            .append("1. Show all items")
+            .append(System.lineSeparator())
+            .append("2. Edit item")
+            .append(System.lineSeparator())
+            .append("3. Delete item")
+            .append(System.lineSeparator())
+            .append("4. Find item by Id")
+            .append(System.lineSeparator())
+            .append("5. Find items by name")
+            .append(System.lineSeparator())
+            .append("6. Exit Program");
     /**
      * Константа меню для добавления новой заявки.
      */
@@ -169,14 +189,7 @@ public class StartUI {
      * Метод отображения меню
      */
     private void showMenu() {
-        System.out.println("Меню.");
-        System.out.println("0. Add new Item");
-        System.out.println("1. Show all items");
-        System.out.println("2. Edit item");
-        System.out.println("3. Delete item");
-        System.out.println("4. Find item by Id");
-        System.out.println("5. Find items by name");
-        System.out.println("6. Exit Program");
+        System.out.println(MENU.toString());
     }
 
     /**

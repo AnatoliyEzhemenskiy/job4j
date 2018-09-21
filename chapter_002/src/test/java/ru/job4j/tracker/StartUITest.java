@@ -84,17 +84,17 @@ public class StartUITest {
         //создаём StubInput с последовательностью действий(производим замену заявки)
         Input input = new StubInput(new String[]{"1", "6"});
         // создаём StartUI и вызываем метод init()
-        new StartUI(input, tracker).init();
+       StartUI su =  new StartUI(input, tracker).init();
         // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
         Item item = tracker.findAll()[0];
         StringBuilder result = new StringBuilder()
-                .append(StartUI.getMENU().toString())
+                .append(su.getMENU().toString())
                 .append(System.lineSeparator())
                 .append("заявки:")
                 .append(System.lineSeparator())
                 .append(getStringItem(item))
                 .append(System.lineSeparator())
-                .append(StartUI.getMENU().toString())
+                .append(su.getMENU().toString())
                 .append(System.lineSeparator());
         assertThat( new String(out.toString()), is(result.toString()));
     }
@@ -108,14 +108,14 @@ public class StartUITest {
         //создаём StubInput с последовательностью действий(производим замену заявки)
         Input input = new StubInput(new String[]{"4", tracker.findAll()[0].getId(),"6"});
         // создаём StartUI и вызываем метод init()
-        new StartUI(input, tracker).init();
+        StartUI su = new StartUI(input, tracker).init();
         // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
         StringBuilder result = new StringBuilder()
-                .append(StartUI.getMENU().toString())
+                .append(su.getMENU().toString())
                 .append(System.lineSeparator())
                 .append(getStringItem(tracker.findAll()[0]))
                 .append(System.lineSeparator())
-                .append(StartUI.getMENU().toString())
+                .append(su.getMENU().toString())
                 .append(System.lineSeparator());
         assertThat( new String(out.toString()), is(result.toString()));
 
@@ -132,16 +132,16 @@ public class StartUITest {
         //создаём StubInput с последовательностью действий(производим замену заявки)
         Input input = new StubInput(new String[]{"5", "test","6"});
         // создаём StartUI и вызываем метод init()
-        new StartUI(input, tracker).init();
+        StartUI su  = new StartUI(input, tracker).init();
         // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
         StringBuilder result = new StringBuilder()
-                .append(StartUI.getMENU().toString())
+                .append(su.getMENU().toString())
                 .append(System.lineSeparator())
                 .append(getStringItem(tracker.findAll()[0]))
                 .append(System.lineSeparator())
                 .append(getStringItem(tracker.findAll()[1]))
                 .append(System.lineSeparator())
-                .append(StartUI.getMENU().toString())
+                .append(su.getMENU().toString())
                 .append(System.lineSeparator());
         assertThat( new String(out.toString()), is(result.toString()));
 

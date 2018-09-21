@@ -1,11 +1,7 @@
 package ru.job4j.tracker;
 
 public class StartUI {
-    public static StringBuilder getMENU() {
-        return MENU;
-    }
-
-    private static final StringBuilder MENU = new StringBuilder()
+    private static StringBuilder MENU = new StringBuilder()
             .append("Меню.")
             .append(System.lineSeparator())
             .append("0. Add new Item")
@@ -75,11 +71,15 @@ public class StartUI {
         this.input = input;
         this.tracker = tracker;
     }
+    public StringBuilder getMENU() {
+        return MENU;
+    }
+
 
     /**
      * Основой цикл программы.
      */
-    public void init() {
+    public StartUI init() {
         boolean exit = false;
         while (!exit) {
             this.showMenu();
@@ -101,6 +101,7 @@ public class StartUI {
                 exit = true;
             }
         }
+        return null;
     }
 
     /**

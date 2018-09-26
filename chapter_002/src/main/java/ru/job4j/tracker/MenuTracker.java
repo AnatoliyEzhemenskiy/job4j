@@ -5,36 +5,6 @@ import java.util.List;
 
 public class MenuTracker {
     /**
-     * Константа для вывода всех заявок
-     */
-    private static final int SHOW_ALL = 1;
-
-    /**
-     * Константа редактирования заявик
-     */
-    public static final int EDIT = 2;
-
-    /**
-     * Константа удаления заявки
-     */
-    public static final int DELETE = 3;
-
-    /**
-     * Константа поиска по id
-     */
-    public static final int FIND_BY_ID = 4;
-
-    /**
-     * Константа поиска по имент
-     */
-    public static final int FIND_BY_NAME = 5;
-
-    /**
-     * Константа для выхода из цикла.
-     */
-    private static final int EXIT = 6;
-
-    /**
      * Метод отображения заявки
      */
     private void showItem(Item item) {
@@ -79,12 +49,12 @@ public class MenuTracker {
      * Метод заполняет массив.
      */
     public void fillActions() {
-        this.actions.add(new AddAction());
-        this.actions.add(new ShowAllAction());
-        this.actions.add(new EditAction());
-        this.actions.add(new DeleteAction());
-        this.actions.add(new FindByIdAction());
-        this.actions.add(new FindByNameAction());
+        this.actions.add(new AddAction(0, "Add item"));
+        this.actions.add(new ShowAllAction(1, "Show all"));
+        this.actions.add(new EditAction(2, "Edit item"));
+        this.actions.add(new DeleteAction(3, "Delete item. "));
+        this.actions.add(new FindByIdAction(4, "Find by id"));
+        this.actions.add(new FindByNameAction(5, "Find by name"));
     }
 
     /**
@@ -111,7 +81,7 @@ public class MenuTracker {
      *
      * @return
      */
-    public StringBuilder getMenuStr(){
+    public StringBuilder getMenuStr() {
         StringBuilder result = new StringBuilder();
         for (UserAction action : this.actions) {
             if (action != null) {
@@ -126,9 +96,17 @@ public class MenuTracker {
      * Класс описывает редактирование заявки
      */
     private static class EditAction implements UserAction {
+        private int key;
+        private  String name;
+
+        public EditAction(int key, String name) {
+            this.key = key;
+            this.name = name;
+        }
+
         @Override
         public int key() {
-            return EDIT;
+            return key;
         }
 
         @Override
@@ -147,7 +125,7 @@ public class MenuTracker {
 
         @Override
         public String info() {
-            return "2 - Edit Item";
+            return String.format("%d. %s", key, name);
         }
     }
 
@@ -155,10 +133,17 @@ public class MenuTracker {
      * Класс описывает удаление заявки
      */
     private class DeleteAction implements UserAction {
+        private int key;
+        private  String name;
+
+        public DeleteAction(int key, String name) {
+            this.key = key;
+            this.name = name;
+        }
 
         @Override
         public int key() {
-            return DELETE;
+            return key;
         }
 
         @Override
@@ -174,7 +159,7 @@ public class MenuTracker {
 
         @Override
         public String info() {
-            return "3 - Delete Item";
+            return String.format("%d. %s", key, name);
         }
     }
 
@@ -182,17 +167,23 @@ public class MenuTracker {
      * Действие поиска по имени
      */
     private class FindByNameAction implements UserAction {
+        private int key;
+        private String name;
+
+        public FindByNameAction(int key, String name) {
+            this.key = key;
+            this.name = name;
+        }
 
         @Override
         public int key() {
-            return FIND_BY_NAME;
+            return key;
         }
 
         @Override
         public void execute(Input input, Tracker tracker) {
             String name = input.ask("Введите наименование заявки:");
-            for (Item item: tracker.findByName(name)
-                    ) {
+            for (Item item: tracker.findByName(name)) {
                 showItem(item);
             }
 
@@ -200,7 +191,7 @@ public class MenuTracker {
 
         @Override
         public String info() {
-            return "5 - Find by name";
+            return String.format("%d. %s", key, name);
         }
     }
 
@@ -208,10 +199,17 @@ public class MenuTracker {
      * Действие поиска по id
      */
     private class FindByIdAction implements UserAction {
+        private int key;
+        private String name;
+
+        public FindByIdAction(int key, String name) {
+            this.key = key;
+            this.name = name;
+        }
 
         @Override
         public int key() {
-            return FIND_BY_ID;
+            return key;
         }
 
         @Override
@@ -227,18 +225,25 @@ public class MenuTracker {
 
         @Override
         public String info() {
-            return "4 - Find by id";
+            return String.format("%d. %s", key, name);
         }
     }
 
     /**
      * Действие отображения всех заявок
      */
-    private class ShowAllAction implements UserAction{
+    private class ShowAllAction implements UserAction {
+        private int key;
+        private String name;
+
+        public ShowAllAction(int key, String name) {
+            this.key = key;
+            this.name = name;
+        }
 
         @Override
         public int key() {
-            return SHOW_ALL;
+            return key;
         }
 
         @Override
@@ -251,7 +256,7 @@ public class MenuTracker {
 
         @Override
         public String info() {
-            return "1 - Show all";
+            return String.format("%d. %s", key, name);
         }
     }
 

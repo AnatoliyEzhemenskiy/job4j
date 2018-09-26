@@ -16,16 +16,7 @@ public class StartUITest {
     // буфер для результата.
     private final ByteArrayOutputStream out = new ByteArrayOutputStream();
 
-    /**
-     * Строка вывода заявки
-     * @param item
-     * @return String
-     */
-    private String getStringItem(Item item) {
-        return "id: " + item.getId() + ", name: " + item.getName() + ", description: " + item.getDescription();
-    }
-
-     @Before
+    @Before
     public void loadOutput() {
         System.out.println("execute before method");
         System.setOut(new PrintStream(this.out));
@@ -50,7 +41,7 @@ public class StartUITest {
         // создаём Tracker
         Tracker tracker = new Tracker();
         //Напрямую добавляем заявку
-        Item item = tracker.add(new Item("test name", "desc",123L));
+        Item item = tracker.add(new Item("test name", "desc", 123L));
         //создаём StubInput с последовательностью действий(производим замену заявки)
         Input input = new StubInput(new String[]{"2", item.getId(), "test replace", "заменили заявку", "y"});
         // создаём StartUI и вызываем метод init()
@@ -64,14 +55,14 @@ public class StartUITest {
         // создаём Tracker
         Tracker tracker = new Tracker();
         //Напрямую добавляем заявку
-        Item[] items = {new Item("test name", "desc",123L),
-                new Item("test name2", "desc2",123L)
+        Item[] items = {new Item("test name", "desc", 123L),
+                new Item("test name2", "desc2", 123L)
         };
-        Item item =  new Item("test name3", "desc3",123L);
+        Item item =  new Item("test name3", "desc3", 123L);
         tracker.add(items[0]);
         tracker.add(items[1]);
         tracker.add(item);
-        Input input = new StubInput(new String[]{"3", item.getId(),"y"});
+        Input input = new StubInput(new String[]{"3", item.getId(), "y"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findAll(), is(items));
     }
@@ -81,7 +72,7 @@ public class StartUITest {
         // создаём Tracker
         Tracker tracker = new Tracker();
         //Напрямую добавляем заявку
-        tracker.add(new Item("test name", "desc",123L));
+        tracker.add(new Item("test name", "desc", 123L));
         //создаём StubInput с последовательностью действий(производим замену заявки)
         Input input = new StubInput(new String[]{"1", "y"});
         // создаём StartUI и вызываем метод init()
@@ -94,9 +85,9 @@ public class StartUITest {
                 .append(su.menuStr.toString())
                 .append("заявки:")
                 .append(System.lineSeparator())
-                .append(getStringItem(item))
+                .append(item.toString())
                 .append(System.lineSeparator());
-        assertThat( new String(out.toString()), is(result.toString()));
+        assertThat(new String(out.toString()), is(result.toString()));
     }
 
     @Test
@@ -104,17 +95,17 @@ public class StartUITest {
         // создаём Tracker
         Tracker tracker = new Tracker();
         //Напрямую добавляем заявку
-        tracker.add(new Item("test name", "desc",123L));
+        tracker.add(new Item("test name", "desc", 123L));
         //создаём StubInput с последовательностью действий(производим замену заявки)
-        Input input = new StubInput(new String[]{"4", tracker.findAll()[0].getId(),"y"});
+        Input input = new StubInput(new String[]{"4", tracker.findAll()[0].getId(), "y"});
         // создаём StartUI и вызываем метод init()
         StartUI su = new StartUI(input, tracker);
         su.init();
         StringBuilder result = new StringBuilder()
                 .append(su.menuStr.toString())
-                .append(getStringItem(tracker.findAll()[0]))
+                .append(tracker.findAll()[0].toString())
                 .append(System.lineSeparator());
-       assertThat( new String(out.toString()), is(result.toString()));
+       assertThat(new String(out.toString()), is(result.toString()));
 
     }
 
@@ -123,22 +114,22 @@ public class StartUITest {
         // создаём Tracker
         Tracker tracker = new Tracker();
         //Напрямую добавляем заявку
-        tracker.add(new Item("test", "desc",123L));
-        tracker.add(new Item("test", "desc2",123L));
+        tracker.add(new Item("test", "desc", 123L));
+        tracker.add(new Item("test", "desc2", 123L));
 
         //создаём StubInput с последовательностью действий(производим замену заявки)
-        Input input = new StubInput(new String[]{"5", "test","y"});
+        Input input = new StubInput(new String[]{"5", "test", "y"});
         // создаём StartUI и вызываем метод init()
         StartUI su  = new StartUI(input, tracker);
         su.init();
         // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
         StringBuilder result = new StringBuilder()
                 .append(su.menuStr.toString())
-                .append(getStringItem(tracker.findAll()[0]))
+                .append(tracker.findAll()[0].toString())
                 .append(System.lineSeparator())
-                .append(getStringItem(tracker.findAll()[1]))
+                .append(tracker.findAll()[1].toString())
                 .append(System.lineSeparator());
-        assertThat( new String(out.toString()), is(result.toString()));
+        assertThat(new String(out.toString()), is(result.toString()));
 
     }
 

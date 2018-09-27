@@ -18,6 +18,11 @@ public class StubInput implements Input {
      */
     private int position;
 
+    @Override
+    public int ask(String question, int[] range) {
+        return 0;
+    }
+
     public StubInput(final String[] value) {
         this.value = value;
     }

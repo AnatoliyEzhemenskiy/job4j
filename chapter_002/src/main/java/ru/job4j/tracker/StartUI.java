@@ -11,7 +11,16 @@ public class StartUI {
      */
     private final Tracker tracker;
 
+    /**
+     * Строка меню для тестов
+     */
     public StringBuilder menuStr;
+
+    /**
+     * Границы диапазона
+     */
+    private int[] ranges = {0, 1, 2, 3, 4, 5};
+
     /**
      * Конструтор инициализирующий поля.
      *
@@ -32,7 +41,7 @@ public class StartUI {
         menuStr = menu.getMenuStr();
         do {
             menu.show();
-            menu.select(Integer.valueOf(this.input.ask("select:")));
+            menu.select(this.input.ask("select:", ranges));
         } while (!"y".equals(this.input.ask("Exit?(y): ")));
     }
 
@@ -42,7 +51,7 @@ public class StartUI {
      * @param args
      */
     public static void main(String[] args) {
-        new StartUI(new ConsoleInput(), new Tracker()).init();
+        new StartUI(new ValidateInput(), new Tracker()).init();
     }
 }
 

@@ -3,18 +3,10 @@ package ru.job4j.tracker;
 /**
  * Класс описывает добавление заявки
  */
-public class AddAction implements UserAction {
-    private int key;
-    private String name;
+public class AddAction extends BaseAction{
 
     public AddAction(int key, String name) {
-        this.key = key;
-        this.name = name;
-    }
-
-    @Override
-    public int key() {
-        return key;
+        super(key, name);
     }
 
     @Override
@@ -27,10 +19,5 @@ public class AddAction implements UserAction {
         System.out.println("------------ Новая заявка с Id : " + item.getId() + "-----------");
         System.out.println("------------ Новая заявка с Name : " + item.getName() + "-----------");
         System.out.println("------------ Новая заявка с Description : " + item.getDescription() + "-----------");
-    }
-
-    @Override
-    public String info() {
-        return String.format("%d. %s", key, name);
     }
 }

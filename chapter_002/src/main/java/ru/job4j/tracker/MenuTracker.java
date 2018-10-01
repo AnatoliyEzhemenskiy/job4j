@@ -4,14 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MenuTracker {
+
+    private int[] ranges;
+
     private int position = 0;
-    /**
-     * Метод отображения заявки
-     */
-    private void showItem(Item item) {
-        System.out.println("id: " + item.getId() + ", name: " + item.getName() + ", description: " + item.getDescription());
+
+    public void setRanges(int[] ranges) {
+        this.ranges = ranges;
     }
 
+    public int[] getRanges() {
+        return ranges;
+    }
 
     /**
      * @param хранит ссылку на объект .
@@ -47,6 +51,11 @@ public class MenuTracker {
         this.actions.add(new DeleteAction(position++, "Delete item. "));
         this.actions.add(new FindByIdAction(position++, "Find by id"));
         this.actions.add(new FindByNameAction(position++, "Find by name"));
+        int[] rangers = new int[position];
+        for (int i = 0; i < position; i++) {
+            rangers[i] = i;
+        }
+        this.setRanges(rangers);
     }
 
     /**
@@ -139,7 +148,7 @@ public class MenuTracker {
         public void execute(Input input, Tracker tracker) {
             String name = input.ask("Введите наименование заявки:");
             for (Item item: tracker.findByName(name)) {
-                showItem(item);
+                System.out.println(item.toString());
             }
 
         }
@@ -158,7 +167,7 @@ public class MenuTracker {
             String id = input.ask("Введите ID заявки:");
             Item item = tracker.findById(id);
             if (item != null) {
-                showItem(item);
+                System.out.println(item.toString());
             } else {
                 System.out.println("Заявки с указанным ID не найдено");
             }
@@ -177,7 +186,7 @@ public class MenuTracker {
         public void execute(Input input, Tracker tracker) {
             System.out.println("заявки:");
             for (Item item : tracker.findAll()) {
-                showItem(item);
+                System.out.println(item.toString());
             }
         }
     }

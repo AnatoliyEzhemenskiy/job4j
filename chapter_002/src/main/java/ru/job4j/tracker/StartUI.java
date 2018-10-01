@@ -17,11 +17,6 @@ public class StartUI {
     public StringBuilder menuStr;
 
     /**
-     * Границы диапазона
-     */
-    private int[] ranges = {0, 1, 2, 3, 4, 5};
-
-    /**
      * Конструтор инициализирующий поля.
      *
      * @param input   ввод данных.
@@ -41,7 +36,7 @@ public class StartUI {
         menuStr = menu.getMenuStr();
         do {
             menu.show();
-            menu.select(this.input.ask("select:", ranges));
+            menu.select(this.input.ask("select:", menu.getRanges()));
         } while (!"y".equals(this.input.ask("Exit?(y): ")));
     }
 

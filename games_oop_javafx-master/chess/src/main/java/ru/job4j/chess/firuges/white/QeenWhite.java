@@ -9,7 +9,7 @@ import ru.job4j.chess.firuges.Figure;
  * @version $Id$
  * @since 0.1
  */
-public class QeenWhite extends Figure {
+public class QeenWhite implements Figure {
     private final Cell position;
 
     public QeenWhite(final Cell position) {

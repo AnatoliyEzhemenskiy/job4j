@@ -62,6 +62,7 @@ public class Chess extends Application {
                     momento.setX(event.getX());
                     momento.setY(event.getY());
                 }
+
         );
         rect.setOnMouseDragged(
                 event -> {
@@ -72,13 +73,15 @@ public class Chess extends Application {
         rect.setOnMouseReleased(
                 event -> {
                     try {
-                        if (logic.move(this.findBy(momento.getX(), momento.getY()), this.findBy(event.getX(), event.getY()))) {
+                         if (logic.move(this.findBy(momento.getX(), momento.getY()), this.findBy(event.getX(), event.getY()))) {
                             rect.setX(((int) event.getX() / 40) * 40 + 5);
                             rect.setY(((int) event.getY() / 40) * 40 + 5);
                         }
                     } catch (ImpossibleMoveException ime) {
                         setPrevPosition((int) momento.getX(),(int) momento.getY(),rect);
                     } catch (OccupiedWayException owe) {
+                        setPrevPosition((int) momento.getX(),(int) momento.getY(),rect);
+                    } catch (FigureNotFoundException fnf) {
                         setPrevPosition((int) momento.getX(),(int) momento.getY(),rect);
                     }
                 }

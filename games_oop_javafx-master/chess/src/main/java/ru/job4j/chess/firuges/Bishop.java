@@ -31,7 +31,7 @@ public abstract class Bishop implements Figure {
         if (isDiagonal(source, dest)) {
             int deltaX = source.x > dest.x ? -1 : 1;
             int deltaY = source.y > dest.y ? -1 : 1;
-            int size = (dest.x - source.x) * deltaX;
+            int size = Math.abs(dest.x - source.x);
             steps = new Cell[size];
             for (int i = 0; i < size; i++) {
                 int x = source.x + (i + 1) * deltaX;

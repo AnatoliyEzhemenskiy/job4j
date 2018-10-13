@@ -15,7 +15,7 @@ public abstract class Rook implements Figure {
         if (isStraightLine(source, dest)) {
             int deltaX = (source.x == dest.x) ? 0 : (source.x > dest.x ? -1 : 1);
             int deltaY = (source.y == dest.y) ? 0 : (source.y > dest.y ? -1 : 1);
-            int size = deltaX == 0 ? (dest.y - source.y) * deltaY : (dest.x - source.x) * deltaX;
+            int size = deltaX == 0 ? Math.abs(dest.y - source.y) : Math.abs(dest.x - source.x);
             steps = new Cell[size];
             for (int i = 0; i < size; i++) {
                 int x = source.x + (i + 1) * deltaX;
